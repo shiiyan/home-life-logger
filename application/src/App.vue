@@ -12,6 +12,10 @@ const isServer = () => {
   return !(typeof window != 'undefined' && window.document);
 };
 
+const isServer = () => {
+  return !(typeof window != "undefined" && window.document)
+}
+
 export default {
   name: 'App',
   components: {
