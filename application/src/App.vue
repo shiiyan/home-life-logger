@@ -8,10 +8,17 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 
+const isServer = () => {
+  return !(typeof window != "undefined" && window.document)
+}
+
 export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  created: () => {
+    console.info(`isServer: ${isServer()}`)
   }
 }
 </script>
