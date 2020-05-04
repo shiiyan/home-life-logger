@@ -6,21 +6,22 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue';
 
 const isServer = () => {
-  return !(typeof window != "undefined" && window.document)
-}
+  return !(typeof window != 'undefined' && window.document);
+};
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
   },
   created: () => {
-    console.info(`isServer: ${isServer()}`)
-  }
-}
+    console.info(
+        `isServer: ${isServer()}`);
+  },
+};
 </script>
 
 <style>
