@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "express": "^4.17.1",
     "vue": "^2.6.11",
     "vue-server-renderer": "^2.6.11"
   },
