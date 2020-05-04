@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "node"
+
+cache: npm
+
+install: 
+  - cd application
+  - npm ci
+
+script: 
+ - npm run build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: application/dist
+  on:
+    branch: master
