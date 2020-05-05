@@ -13,6 +13,10 @@
 
 <script>
 export default {
+
+
+
+  
   data () {
     return {
       steps: [
@@ -34,11 +38,15 @@ export default {
   },
   methods: {
     goNext () {
+      if (this.currentStep >= this.steps.length) return
+
       this.steps[this.currentStep].value = 1
       this.currentStep += 1
     },
 
     goBack () {
+      if (this.currentStep <= 0) return
+
       this.currentStep -= 1
       this.steps[this.currentStep].value = 0
     }
