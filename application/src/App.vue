@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+    <b-alert show>Default Alert</b-alert>
+    <b-alert variant="success" show>Success Alert</b-alert>
     <HelloWorld msg="Hello Vue"/>
   </div>
 </template>
