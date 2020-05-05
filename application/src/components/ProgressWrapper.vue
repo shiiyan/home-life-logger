@@ -7,6 +7,7 @@
     <FoodRater v-if="currentStep===0" />
     <SleepTimePicker v-if="currentStep===1" />
     <WorkoutTimeSpinner v-if="currentStep===2" />
+    <p class="h1 mt-5" v-if="currentStep===3">Completed!</p>
   </Progress>
 </template>
 
@@ -38,13 +39,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>
