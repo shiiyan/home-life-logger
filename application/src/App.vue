@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    <b-container fluid="lg">
-      <Progress />
-    </b-container>
+    <Container>
+      <Progress>
+        <SleepTimePicker />
+      </Progress>
+    </Container>
   </div>
 </template>
 
 <script>
+import Container from './components/Container.vue'
 import Progress from './components/Progress.vue'
+import SleepTimePicker from './components/form/SleepTimePicker.vue'
 
 const isServer = () => {
   return !(typeof window !== 'undefined' && window.document)
@@ -16,7 +20,9 @@ const isServer = () => {
 export default {
   name: 'App',
   components: {
-    Progress
+    Container,
+    Progress,
+    SleepTimePicker
   },
   created: () => {
     console.info(

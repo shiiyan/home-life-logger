@@ -4,7 +4,8 @@
       <b-progress-bar v-for="step in steps" :key="step.color" :value="step.value" :variant="step.color">
       </b-progress-bar>
     </b-progress>
-    <b-button-group class="mt-3">
+    <slot />
+    <b-button-group class="mt-5">
       <b-button  @click="goBack">Go Back</b-button>
       <b-button  @click="goNext">Go Next</b-button>
     </b-button-group>
