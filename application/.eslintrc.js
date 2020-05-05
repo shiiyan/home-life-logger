@@ -8,7 +8,7 @@ module.exports = {
     "extends": [
         "plugin:vue/essential",
         "eslint:recommended",
-        "google"
+        "standard"
     ],
     "globals": {
         "Atomics": "readonly",
