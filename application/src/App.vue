@@ -1,14 +1,13 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <b-alert show>Default Alert</b-alert>
-    <b-alert variant="success" show>Success Alert</b-alert>
-    <HelloWorld msg="Hello Vue"/>
+    <b-container fluid="lg">
+      <Progress />
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Progress from './components/Progress.vue'
 
 const isServer = () => {
   return !(typeof window !== 'undefined' && window.document)
@@ -17,7 +16,7 @@ const isServer = () => {
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Progress
   },
   created: () => {
     console.info(
@@ -33,6 +32,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
