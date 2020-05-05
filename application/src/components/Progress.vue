@@ -5,10 +5,10 @@
       </b-progress-bar>
     </b-progress>
     <slot />
-    <b-button-group class="mt-5">
-      <b-button  @click="goBack">Go Back</b-button>
-      <b-button  @click="goNext">Go Next</b-button>
-    </b-button-group>
+    <div class="mt-5">
+      <b-button pill variant="outline-primary" @click="goBack">Go Back</b-button>
+      <b-button class="ml-3" pill variant="outline-success" @click="goNext">Go Next</b-button>
+    </div>
   </div>
 </template>
 
@@ -30,8 +30,12 @@ export default {
           color: 'danger',
           value: 0
         }
-      ],
-      currentStep: 0
+      ]
+    }
+  },
+  props: {
+    currentStep: {
+      type: Number
     }
   },
   methods: {
@@ -39,14 +43,14 @@ export default {
       if (this.currentStep >= this.steps.length) return
 
       this.steps[this.currentStep].value = 1
-      this.currentStep += 1
+      this.$emit('go-next')
     },
 
     goBack () {
       if (this.currentStep <= 0) return
 
-      this.currentStep -= 1
-      this.steps[this.currentStep].value = 0
+      this.steps[this.currentStep - 1].value = 0
+      this.$emit('go-back')
     }
   }
 }

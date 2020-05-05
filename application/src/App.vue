@@ -1,17 +1,14 @@
 <template>
   <div id="app">
     <Container>
-      <Progress>
-        <SleepTimePicker />
-      </Progress>
+      <ProgressWrapper />
     </Container>
   </div>
 </template>
 
 <script>
 import Container from './components/Container.vue'
-import Progress from './components/Progress.vue'
-import SleepTimePicker from './components/form/SleepTimePicker.vue'
+import ProgressWrapper from './components/ProgressWrapper.vue'
 
 const isServer = () => {
   return !(typeof window !== 'undefined' && window.document)
@@ -21,8 +18,7 @@ export default {
   name: 'App',
   components: {
     Container,
-    Progress,
-    SleepTimePicker
+    ProgressWrapper
   },
   created: () => {
     console.info(
