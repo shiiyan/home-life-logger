@@ -1,27 +1,29 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-alert show>Default Alert</b-alert>
+    <b-alert variant="success" show>Success Alert</b-alert>
+    <HelloWorld msg="Hello Vue"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import HelloWorld from './components/HelloWorld.vue'
 
 const isServer = () => {
-  return !(typeof window != 'undefined' && window.document);
-};
+  return !(typeof window !== 'undefined' && window.document)
+}
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    HelloWorld
   },
   created: () => {
     console.info(
-        `isServer: ${isServer()}`);
-  },
-};
+        `isServer: ${isServer()}`)
+  }
+}
 </script>
 
 <style>
