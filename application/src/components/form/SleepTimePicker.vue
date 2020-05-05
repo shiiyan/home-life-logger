@@ -1,13 +1,6 @@
 <template>
   <div>
-<<<<<<< HEAD
     <b-row align-h="center" class="h2 mt-5">Select Sleeping Time</b-row>
-=======
-    <b-row align-h="center" class="mt-5">
-      <img alt="Sleeping" src="../../assets/bed.png" width="40%">
-    </b-row>
-    <b-row align-h="center" class="h2 mt-5">Input Sleeping Time</b-row>
->>>>>>> master
     <b-row align-h="center" class="mt-5">
       <b-col sm="6">
         <b-form-timepicker v-model="sleepTime" locale="en" placeholder="Sleep Time" now-button reset-button>
@@ -15,11 +8,7 @@
       </b-col>
     </b-row>
     <b-row align-h="center" class="h2 mb-0">~</b-row>
-<<<<<<< HEAD
     <b-row align-h="center" class="mb-5">
-=======
-    <b-row align-h="center">
->>>>>>> master
       <b-col sm="6">
         <b-form-timepicker v-model="awakeTime" locale="en" placeholder="Awake Time" now-button reset-button>
         </b-form-timepicker>
