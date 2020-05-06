@@ -1,7 +1,12 @@
 <template>
   <div>
     <b-progress class="mt-2" :max="steps.length" animated>
-      <b-progress-bar v-for="step in steps" :key="step.color" :value="step.value" :variant="step.color">
+      <b-progress-bar
+        v-for="step in steps"
+        :key="step.name"
+        :value="step.value"
+        :variant="step.color"
+      >
       </b-progress-bar>
     </b-progress>
     <slot />
@@ -20,24 +25,12 @@
 </template>
 
 <script>
-export default {
+import { steps } from '../helper.js'
 
-  data () {
-    return {
-      steps: [
-        {
-          color: 'success',
-          value: 0
-        },
-        {
-          color: 'warning',
-          value: 0
-        },
-        {
-          color: 'danger',
-          value: 0
-        }
-      ]
+export default {
+  computed: {
+    steps () {
+      return steps
     }
   },
   props: {
