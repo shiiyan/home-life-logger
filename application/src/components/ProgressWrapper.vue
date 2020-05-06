@@ -1,5 +1,5 @@
 <template>
-  <ProgressBar
+  <ProgressShell
     :current-step="currentStep"
     @go-next="handleGoNext"
     @go-back="handleGoBack"
@@ -8,11 +8,11 @@
     <SleepTimePicker v-if="currentStep===1" />
     <WorkoutTimeSpinner v-if="currentStep===2" />
     <Result v-if="currentStep===3" />
-  </ProgressBar>
+  </ProgressShell>
 </template>
 
 <script>
-import ProgressBar from './ProgressBar.vue'
+import ProgressShell from './ProgressShell.vue'
 import FoodRater from './form/FoodRater.vue'
 import SleepTimePicker from './form/SleepTimePicker.vue'
 import WorkoutTimeSpinner from './form/WorkoutTimeSpinner.vue'
@@ -25,7 +25,7 @@ export default {
     }
   },
   components: {
-    ProgressBar,
+    ProgressShell,
     FoodRater,
     SleepTimePicker,
     WorkoutTimeSpinner,

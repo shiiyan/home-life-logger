@@ -19,7 +19,24 @@
       >
         Go Back
       </b-button>
-      <b-button class="ml-3" pill variant="outline-success" @click="goNext">Go Next</b-button>
+      <b-button
+        v-if="currentStep<=2"
+        class="ml-3"
+        pill
+        variant="outline-success"
+        @click="goNext"
+      >
+        Go Next
+      </b-button>
+      <b-button
+        v-if="currentStep===3"
+        class="ml-3"
+        pill
+        variant="outline-success"
+        @click="upload"
+      >
+        Upload
+      </b-button>
     </div>
   </div>
 </template>
