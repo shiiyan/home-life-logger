@@ -1,16 +1,22 @@
+export const stepNames = {
+  foodRating: 'Food Rating',
+  sleepingTime: 'Sleeping Time',
+  workoutTime: 'Workout Time'
+}
+
 export const steps = [
   {
-    name: 'Food Rating',
+    name: stepNames.foodRating,
     color: 'success',
     value: 0
   },
   {
-    name: 'Sleeping Time',
+    name: stepNames.sleepingTime,
     color: 'warning',
     value: 0
   },
   {
-    name: 'Workout Time',
+    name: stepNames.workoutTime,
     color: 'danger',
     value: 0
   }

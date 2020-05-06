@@ -6,7 +6,7 @@
         <b-list-group>
           <b-list-group-item
             v-for="step in steps"
-            :key="step.color"
+            :key="step.name"
             :variant="step.color"
           >
             {{ step.name }}: {{ result[step.name] }}
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { steps } from '../helper.js'
+import { steps, stepNames } from '../helper.js'
 import { store } from '../store.js'
 
 export default {
@@ -29,10 +29,12 @@ export default {
     },
     result () {
       return {
-        'Food Rating': store.state.foodRate,
-        'Sleeping Time':
+        [stepNames.foodRating]:
+          store.state.foodRate,
+        [stepNames.sleepingTime]:
           `${store.state.sleepingTime.sleepTime} ~ ${store.state.sleepingTime.awakeTime}`,
-        'Workout Time': store.state.workoutTime
+        [stepNames.workoutTime]:
+          store.state.workoutTime
       }
     }
   }
