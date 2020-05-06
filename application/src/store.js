@@ -18,7 +18,7 @@ export const store = createStore({
     foodRate: 0,
     sleepingTime: {
       sleepTime: '',
-      awakeTIme: ''
+      awakeTime: ''
     },
     workoutTime: 0
   },

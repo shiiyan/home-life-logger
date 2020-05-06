@@ -15,7 +15,7 @@
       </b-col>
     </b-row>
     <b-row align-h="center" class="h2 mb-0">~</b-row>
-    <b-row align-h="center" class="mb-5">
+    <b-row align-h="center">
       <b-col sm="6">
         <b-form-timepicker
           v-model="awakeTime"

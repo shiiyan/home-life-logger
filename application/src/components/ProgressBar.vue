@@ -20,24 +20,12 @@
 </template>
 
 <script>
-export default {
+import { steps } from '../helper.js'
 
-  data () {
-    return {
-      steps: [
-        {
-          color: 'success',
-          value: 0
-        },
-        {
-          color: 'warning',
-          value: 0
-        },
-        {
-          color: 'danger',
-          value: 0
-        }
-      ]
+export default {
+  computed: {
+    steps () {
+      return steps
     }
   },
   props: {

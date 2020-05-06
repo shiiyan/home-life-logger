@@ -1,5 +1,5 @@
 <template>
-  <Progress
+  <ProgressBar
     :current-step="currentStep"
     @go-next="handleGoNext"
     @go-back="handleGoBack"
@@ -7,15 +7,16 @@
     <FoodRater v-if="currentStep===0" />
     <SleepTimePicker v-if="currentStep===1" />
     <WorkoutTimeSpinner v-if="currentStep===2" />
-    <p class="h1 mt-5" v-if="currentStep===3">Completed!</p>
-  </Progress>
+    <Result v-if="currentStep===3" />
+  </ProgressBar>
 </template>
 
 <script>
-import Progress from './Progress.vue'
+import ProgressBar from './ProgressBar.vue'
 import FoodRater from './form/FoodRater.vue'
 import SleepTimePicker from './form/SleepTimePicker.vue'
 import WorkoutTimeSpinner from './form/WorkoutTimeSpinner.vue'
+import Result from './Result.vue'
 
 export default {
   data () {
@@ -24,10 +25,11 @@ export default {
     }
   },
   components: {
-    Progress,
+    ProgressBar,
     FoodRater,
     SleepTimePicker,
-    WorkoutTimeSpinner
+    WorkoutTimeSpinner,
+    Result
   },
   methods: {
     handleGoNext () {
