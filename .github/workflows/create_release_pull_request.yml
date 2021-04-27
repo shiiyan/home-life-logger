@@ -1,0 +1,24 @@
+name: Create release pull request
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  createReleasePullRequest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Reset master branch
+        run: |
+          git fetch origin develop:develop
+          git reset --hard develop
+      - name: Get current date
+        id: current-datetime-generator
+        run: echo "::set-output name=CURRENT_DATETIME::$(date '+%Y%m%d%H%M')"
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          delete-branch: true
+          title: "RELEASE ${{steps.current-datetime-generator.outputs.CURRENT_DATETIME}}"
