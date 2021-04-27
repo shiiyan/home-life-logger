@@ -1,0 +1,21 @@
+name: Create release pull request
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  createReleasePullRequest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Reset master branch
+        run: |
+          git fetch origin develop:develop
+          git reset --hard develop
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          delete-branch: true
+          title: "RELEASE `date '+%Y%m%d%H%M'`"
