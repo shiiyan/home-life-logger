@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: master
-      - name: Reset master branch
+      - name: Reset develop branch
         run: |
           git fetch origin develop:develop
           git reset --hard develop
@@ -22,3 +22,4 @@ jobs:
         with:
           delete-branch: true
           title: "RELEASE ${{steps.current-datetime-generator.outputs.CURRENT_DATETIME}}"
+          branch: "create-pull-request/develop-to-master"
