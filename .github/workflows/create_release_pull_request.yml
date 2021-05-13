@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: master
-      - name: Reset master branch
+      - name: Reset develop branch
         run: |
           git fetch origin develop:develop
           git reset --hard develop
@@ -28,3 +28,5 @@ jobs:
             - [ ] 私は、ステージング環境で今回の実装によって既存機能がデグレっていない事を確認しました
 
             [1]: https://staging.crowdlinks.jp
+          branch: "create-pull-request/develop-to-master"
+
