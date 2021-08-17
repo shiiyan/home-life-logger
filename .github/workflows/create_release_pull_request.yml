@@ -22,11 +22,4 @@ jobs:
         with:
           delete-branch: true
           title: "RELEASE ${{steps.current-datetime-generator.outputs.CURRENT_DATETIME}}"
-          body: |
-            ## ぷるりの誓い
-            - [ ] 私は、[ステージング環境][1]で今回の実装が仕様通りに動作する事を確認しました
-            - [ ] 私は、ステージング環境で今回の実装によって既存機能がデグレっていない事を確認しました
-
-            [1]: https://staging.crowdlinks.jp
           branch: "create-pull-request/develop-to-master"
-
