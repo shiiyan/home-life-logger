@@ -11,6 +11,7 @@ install:
 script: 
  - npm run lint || travis_terminate 1
  - npm run build
+ - printf "VUE_APP_API_KEY=$VUE_APP_API_KEY\nVUE_APP_PROJECT_ID=$VUE_APP_PROJECT_ID\n" >> .env
 
 deploy:
   provider: pages
