@@ -19,14 +19,17 @@
 </template>
 
 <script>
-import { steps, stepNames } from '../../helper.js'
 import { store } from '../../store.js'
+import { stepNames } from '../../variables.js'
 
 export default {
+  props: {
+    steps: {
+      type: Array,
+      required: true
+    }
+  },
   computed: {
-    steps () {
-      return steps
-    },
     result () {
       return {
         [stepNames.foodRating]: store.state.foodRate,

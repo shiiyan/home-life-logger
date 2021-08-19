@@ -9,7 +9,6 @@
           placeholder="Sleep Time"
           now-button
           reset-button
-          @input="handleInputSleepTime"
         >
         </b-form-timepicker>
       </b-col>
@@ -23,7 +22,6 @@
           placeholder="Awake Time"
           now-button
           reset-button
-          @input="handleInputAwakeTime"
         >
         </b-form-timepicker>
       </b-col>
@@ -35,18 +33,14 @@
 import { store } from '../../store.js'
 
 export default {
-  data () {
-    return {
-      sleepTime: store.state.sleepingTime.sleepTime,
-      awakeTime: store.state.sleepingTime.awakeTime
-    }
-  },
-  methods: {
-    handleInputSleepTime (newValue) {
-      store.commit('updateSleepTime', newValue)
+  computed: {
+    sleepTime: {
+      get: () => store.state.sleepingTime.sleepTime,
+      set: (newValue) => store.commit('updateSleepTime', newValue)
     },
-    handleInputAwakeTime (newValue) {
-      store.commit('updateAwakeTime', newValue)
+    awakeTime: {
+      get: () => store.state.sleepingTime.awakeTime,
+      set: (newValue) => store.commit('updateAwakeTime', newValue)
     }
   }
 }
