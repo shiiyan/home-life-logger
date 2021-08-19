@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-progress class="mt-2" :max="steps.length" animated>
+    <h3 class="mt-2 text-right">Welcome {{ userName }}!</h3>
+    <b-progress class="mt-5" :max="steps.length" animated>
       <b-progress-bar
         v-for="step in steps"
         :key="step.name"
@@ -44,6 +45,10 @@
 <script>
 export default {
   props: {
+    userName: {
+      type: String,
+      required: true
+    },
     currentStep: {
       type: Number,
       required: true

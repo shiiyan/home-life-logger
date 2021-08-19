@@ -1,5 +1,6 @@
 <template>
   <StepFrame
+    :user-name="currentUser.displayName"
     :current-step="currentStep"
     :steps="steps"
     @click-go-next="handleGoNext"
@@ -21,6 +22,12 @@ import Result from '../stepContent/Result.vue'
 import { stepNames } from '../../variables.js'
 
 export default {
+  props: {
+    currentUser: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     return {
       currentStep: 0,
