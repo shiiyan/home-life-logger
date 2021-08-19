@@ -26,20 +26,21 @@ export default {
       currentStep: 0,
       steps: [
         {
-          name: stepNames.foodRating,
-          color: 'success',
-          value: 0
-        },
-        {
           name: stepNames.sleepingTime,
-          color: 'warning',
+          color: 'success',
           value: 0
         },
         {
           name: stepNames.workoutTime,
           color: 'danger',
           value: 0
+        },
+        {
+          name: stepNames.foodRating,
+          color: 'warning',
+          value: 0
         }
+
       ]
     }
   },
