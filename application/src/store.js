@@ -36,5 +36,4 @@ export const store = createStore({
       state.workoutTime = newWorkoutTime
     }
   }
-
 })

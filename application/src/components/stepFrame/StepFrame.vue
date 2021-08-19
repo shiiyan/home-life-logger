@@ -12,7 +12,7 @@
     <slot />
     <div class="mt-5">
       <b-button
-        :disabled="currentStep===0"
+        :disabled="currentStep === 0"
         pill
         variant="outline-primary"
         @click="goBack"
@@ -20,7 +20,7 @@
         Go Back
       </b-button>
       <b-button
-        v-if="currentStep<=2"
+        v-if="currentStep <= 2"
         class="ml-3"
         pill
         variant="outline-success"
@@ -29,7 +29,7 @@
         Go Next
       </b-button>
       <b-button
-        v-if="currentStep===3"
+        v-if="currentStep === 3"
         class="ml-3"
         pill
         variant="outline-success"
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { steps } from '../helper.js'
+import { steps } from '../../helper.js'
 
 export default {
   computed: {

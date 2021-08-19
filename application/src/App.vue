@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <Container>
-      <ProgressWrapper />
-    </Container>
+    <AppContainer>
+      <AppContent />
+    </AppContainer>
   </div>
 </template>
 
 <script>
-import Container from './components/Container.vue'
-import ProgressWrapper from './components/ProgressWrapper.vue'
+import AppContainer from './components/container/AppContainer.vue'
+import AppContent from './components/appContent/AppContent.vue'
 
 const isServer = () => {
   return !(typeof window !== 'undefined' && window.document)
@@ -17,12 +17,11 @@ const isServer = () => {
 export default {
   name: 'App',
   components: {
-    Container,
-    ProgressWrapper
+    AppContainer,
+    AppContent
   },
   created: () => {
-    console.info(
-        `isServer: ${isServer()}`)
+    console.info(`isServer: ${isServer()}`)
   }
 }
 </script>

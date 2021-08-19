@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import { steps, stepNames } from '../helper.js'
-import { store } from '../store.js'
+import { steps, stepNames } from '../../helper.js'
+import { store } from '../../store.js'
 
 export default {
   computed: {
@@ -29,12 +29,9 @@ export default {
     },
     result () {
       return {
-        [stepNames.foodRating]:
-          store.state.foodRate,
-        [stepNames.sleepingTime]:
-          `${store.state.sleepingTime.sleepTime} ~ ${store.state.sleepingTime.awakeTime}`,
-        [stepNames.workoutTime]:
-          store.state.workoutTime
+        [stepNames.foodRating]: store.state.foodRate,
+        [stepNames.sleepingTime]: `${store.state.sleepingTime.sleepTime} ~ ${store.state.sleepingTime.awakeTime}`,
+        [stepNames.workoutTime]: store.state.workoutTime
       }
     }
   }
