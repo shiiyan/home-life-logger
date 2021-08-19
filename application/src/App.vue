@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import AppContainer from './components/container/AppContainer.vue'
+import AppContainer from './components/appContainer/AppContainer.vue'
 import AppContent from './components/appContent/AppContent.vue'
 
 const isServer = () => {

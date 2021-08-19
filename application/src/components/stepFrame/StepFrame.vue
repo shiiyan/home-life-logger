@@ -12,7 +12,7 @@
     <slot />
     <div class="mt-5">
       <b-button
-        :disabled="currentStep === 0"
+        :disabled="isDisableGoBackButton"
         pill
         variant="outline-primary"
         @click="goBack"
@@ -20,7 +20,7 @@
         Go Back
       </b-button>
       <b-button
-        v-if="currentStep <= 2"
+        v-if="isVisibleGoNextButton"
         class="ml-3"
         pill
         variant="outline-success"
@@ -29,7 +29,7 @@
         Go Next
       </b-button>
       <b-button
-        v-if="currentStep === 3"
+        v-if="isVisibleUploadButton"
         class="ml-3"
         pill
         variant="outline-success"
@@ -42,32 +42,39 @@
 </template>
 
 <script>
-import { steps } from '../../helper.js'
-
 export default {
-  computed: {
-    steps () {
-      return steps
-    }
-  },
   props: {
     currentStep: {
-      type: Number
+      type: Number,
+      required: true
+    },
+    steps: {
+      type: Array,
+      required: true
+    }
+  },
+  computed: {
+    isDisableGoBackButton () {
+      return this.currentStep === 0
+    },
+    isVisibleGoNextButton () {
+      return this.currentStep < this.steps.length
+    },
+    isVisibleUploadButton () {
+      return this.currentStep === this.steps.length
     }
   },
   methods: {
     goNext () {
-      if (this.currentStep >= this.steps.length) return
-
-      this.steps[this.currentStep].value = 1
-      this.$emit('go-next')
+      this.$emit('click-go-next')
     },
 
     goBack () {
-      if (this.currentStep <= 0) return
-
-      this.steps[this.currentStep - 1].value = 0
-      this.$emit('go-back')
+      this.$emit('click-go-back')
+    },
+    upload () {
+      // Todo: fix for real upload
+      alert('upload succeed!')
     }
   }
 }

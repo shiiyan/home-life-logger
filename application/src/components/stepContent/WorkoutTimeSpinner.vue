@@ -7,7 +7,6 @@
           v-model="workoutTime"
           min="0"
           max="200"
-          @change="handleChange"
         >
         </b-form-spinbutton>
       </b-col>
@@ -19,14 +18,10 @@
 import { store } from '../../store.js'
 
 export default {
-  data () {
-    return {
-      workoutTime: store.state.workoutTime
-    }
-  },
-  methods: {
-    handleChange (newValue) {
-      store.commit('updateWorkoutTime', newValue)
+  computed: {
+    workoutTime: {
+      get: () => store.state.workoutTime,
+      set: (newValue) => store.commit('updateWorkoutTime', newValue)
     }
   }
 }

@@ -7,7 +7,6 @@
           v-model="foodRate"
           variant="warning"
           class="mb-2"
-          @change="handleChange"
         >
         </b-form-rating>
       </b-col>
@@ -19,14 +18,10 @@
 import { store } from '../../store.js'
 
 export default {
-  data () {
-    return {
-      foodRate: store.state.foodRate
-    }
-  },
-  methods: {
-    handleChange (newValue) {
-      store.commit('updateFoodRate', newValue)
+  computed: {
+    foodRate: {
+      get: () => store.state.foodRate,
+      set: (newValue) => store.commit('updateFoodRate', newValue)
     }
   }
 }
