@@ -7,23 +7,23 @@
 </template>
 
 <script>
-import AppContainer from './components/container/AppContainer.vue'
-import AppContent from './components/appContent/AppContent.vue'
+import AppContainer from "./components/appContainer/AppContainer.vue";
+import AppContent from "./components/appContent/AppContent.vue";
 
 const isServer = () => {
-  return !(typeof window !== 'undefined' && window.document)
-}
+  return !(typeof window !== "undefined" && window.document);
+};
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     AppContainer,
-    AppContent
+    AppContent,
   },
   created: () => {
-    console.info(`isServer: ${isServer()}`)
-  }
-}
+    console.info(`isServer: ${isServer()}`);
+  },
+};
 </script>
 
 <style>
