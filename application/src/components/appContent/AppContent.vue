@@ -73,16 +73,17 @@ export default {
     },
     isVisibleWorkoutTimeSpinner () {
       return this.steps[this.currentStep]?.name === stepNames.workoutTime
+    },
+    docRef () {
+      return firebase.firestore()
+        .collection('users')
+        .doc(this.currentUser.uid)
+        .collection('dailyLogs')
+        .doc(CURRENT_DATE)
     }
   },
   created () {
-    const docRef = firebase.firestore()
-      .collection('users')
-      .doc(this.currentUser.uid)
-      .collection('dailyLogs')
-      .doc(CURRENT_DATE)
-
-    docRef.get().then((doc) => {
+    this.docRef.get().then((doc) => {
       if (doc.exists) {
         store.commit('updateFoodRate', doc.data().foodRating)
         store.commit('updateSleepTime', doc.data().sleepingTime.sleepTime)
@@ -110,16 +111,11 @@ export default {
       this.currentStep -= 1
     },
     handleUpload () {
-      firebase.firestore()
-        .collection('users')
-        .doc(this.currentUser.uid)
-        .collection('dailyLogs')
-        .doc(CURRENT_DATE)
-        .set({
-          foodRating: store.state.foodRate,
-          workoutTime: store.state.workoutTime,
-          sleepingTime: store.state.sleepingTime
-        })
+      this.docRef.set({
+        foodRating: store.state.foodRate,
+        workoutTime: store.state.workoutTime,
+        sleepingTime: store.state.sleepingTime
+      })
         .then(() => {
           alert('Upload succeed!')
         })
