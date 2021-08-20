@@ -73,13 +73,11 @@ export default {
     goNext () {
       this.$emit('click-go-next')
     },
-
     goBack () {
       this.$emit('click-go-back')
     },
     upload () {
-      // Todo: fix for real upload
-      alert('upload succeed!')
+      this.$emit('click-upload')
     }
   }
 }
