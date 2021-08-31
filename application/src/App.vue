@@ -15,6 +15,7 @@ import LoginPanel from './components/loginPanel/LoginPanel.vue'
 import LoadingSpinner from './components/loadingSpinner/LoadingSpinner.vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/messaging'
 
 const isServer = () => {
   return !(typeof window !== 'undefined' && window.document)
@@ -44,6 +45,20 @@ export default {
       }
       this.isFinishedLogin = true
     })
+
+    firebase.messaging().getToken({
+      vapidKey: process.env.VUE_APP_PUBLIC_VAPID_KEY
+    })
+      .then((currentToken) => {
+        if (currentToken) {
+          // console.log('currentToken, ', currentToken)
+        } else {
+          console.info('No registration token available. Request permission to generate one.')
+        }
+      })
+      .catch((err) => {
+        console.error('An error occured while retrieving token. ', err)
+      })
   }
 }
 </script>
