@@ -51,9 +51,9 @@ export default {
     })
       .then((currentToken) => {
         if (currentToken) {
-          console.log('currentToken, ', currentToken)
+          // console.log('currentToken, ', currentToken)
         } else {
-          console.log('No registration token available. Request permission to generate one.')
+          console.info('No registration token available. Request permission to generate one.')
         }
       })
       .catch((err) => {
