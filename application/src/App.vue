@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <AppContainer v-if="isFinishedLogin">
-      <AppContent v-if="currentUser" :currentUser="currentUser"/>
-      <LoginPanel v-else/>
+      <AppContent v-if="currentUser" :currentUser="currentUser" />
+      <LoginPanel v-else />
     </AppContainer>
     <LoadingSpinner v-else />
   </div>
@@ -35,9 +35,9 @@ export default {
       isFinishedLogin: false
     }
   },
-  created () {
+  async created () {
     console.info(`isServer: ${isServer()}`)
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.currentUser = user
       } else {
@@ -46,14 +46,23 @@ export default {
       this.isFinishedLogin = true
     })
 
-    firebase.messaging().getToken({
-      vapidKey: process.env.VUE_APP_PUBLIC_VAPID_KEY
-    })
+    const swRegistration = await navigator.serviceWorker.register(
+      'firebase-messaging-sw.js'
+    )
+
+    firebase
+      .messaging()
+      .getToken({
+        serviceWorkerRegistration: swRegistration,
+        vapidKey: process.env.VUE_APP_PUBLIC_VAPID_KEY
+      })
       .then((currentToken) => {
         if (currentToken) {
           // console.log('currentToken, ', currentToken)
         } else {
-          console.info('No registration token available. Request permission to generate one.')
+          console.info(
+            'No registration token available. Request permission to generate one.'
+          )
         }
       })
       .catch((err) => {

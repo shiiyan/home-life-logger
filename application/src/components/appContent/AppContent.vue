@@ -10,7 +10,7 @@
     <FoodRater v-if="isVisibleFoodRater" />
     <SleepTimePicker v-else-if="isVisibleSleepTimePicker" />
     <WorkoutTimeSpinner v-else-if="isVisibleWorkoutTimeSpinner" />
-    <Result :steps="steps" v-else/>
+    <Result :steps="steps" v-else />
   </StepFrame>
 </template>
 
@@ -53,7 +53,6 @@ export default {
           color: 'warning',
           value: 0
         }
-
       ]
     }
   },
@@ -75,7 +74,8 @@ export default {
       return this.steps[this.currentStep]?.name === stepNames.workoutTime
     },
     docRef () {
-      return firebase.firestore()
+      return firebase
+        .firestore()
         .collection('users')
         .doc(this.currentUser.uid)
         .collection('dailyLogs')
@@ -83,18 +83,18 @@ export default {
     }
   },
   created () {
-    this.docRef.get().then((doc) => {
-      if (doc.exists) {
-        store.commit('updateFoodRate', doc.data().foodRating)
-        store.commit('updateSleepTime', doc.data().sleepingTime.sleepTime)
-        store.commit('updateAwakeTime', doc.data().sleepingTime.awakeTime)
-        store.commit('updateWorkoutTime', doc.data().workoutTime)
-      }
-    })
+    this.docRef
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          store.commit('updateFoodRate', doc.data().foodRating)
+          store.commit('updateSleepTime', doc.data().sleepingTime.sleepTime)
+          store.commit('updateAwakeTime', doc.data().sleepingTime.awakeTime)
+          store.commit('updateWorkoutTime', doc.data().workoutTime)
+        }
+      })
       .catch((error) => {
-        console.error(
-          'Error getting document: ', error
-        )
+        console.error('Error getting document: ', error)
       })
   },
   methods: {
@@ -111,11 +111,12 @@ export default {
       this.currentStep -= 1
     },
     handleUpload () {
-      this.docRef.set({
-        foodRating: store.state.foodRate,
-        workoutTime: store.state.workoutTime,
-        sleepingTime: store.state.sleepingTime
-      })
+      this.docRef
+        .set({
+          foodRating: store.state.foodRate,
+          workoutTime: store.state.workoutTime,
+          sleepingTime: store.state.sleepingTime
+        })
         .then(() => {
           alert('Upload succeed!')
         })
