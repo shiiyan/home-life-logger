@@ -47,7 +47,9 @@ export default {
     })
 
     const swRegistration = await navigator.serviceWorker.register(
-      'firebase-messaging-sw.js'
+      process.env.VUE_APP_CUSTOM_SUBDIRECTORY
+        ? `./${process.env.VUE_APP_CUSTOM_SUBDIRECTORY}/firebase-messaging-sw.js`
+        : 'firebase-messaging-sw.js'
     )
 
     firebase
