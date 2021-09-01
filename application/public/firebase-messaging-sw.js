@@ -5,7 +5,7 @@ importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js");
 importScripts(
   "https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"
 );
-importScripts("swenv.js");
+importScripts("swenv.js")
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_API_KEY,
