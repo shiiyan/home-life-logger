@@ -1,4 +1,4 @@
-name: Label pull requests
+name: Prepare pull requests for review
 on:
   pull_request:
     types:
