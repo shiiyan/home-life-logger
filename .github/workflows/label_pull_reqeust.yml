@@ -8,7 +8,7 @@ jobs:
   label_pull_requests:
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: read|write
+      pull-requests: write
     steps:
       - uses: actions/github-script@v6
         with:
