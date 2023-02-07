@@ -1,0 +1,21 @@
+name: Label pull requests
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+jobs:
+  label_pull_requests:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read|write
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["my-label"]
+            })
