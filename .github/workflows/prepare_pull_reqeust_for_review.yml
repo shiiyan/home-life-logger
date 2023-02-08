@@ -10,7 +10,9 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - uses: actions/github-script@v6
+      - name: add labels to pull request
+        id: label-pr
+        uses: actions/github-script@v6
         with:
           script: |
             github.rest.issues.addLabels({
@@ -19,3 +21,15 @@ jobs:
               repo: context.repo.repo,
               labels: ["my label"]
             })
+      - name: get pull request body
+        id: get-pr-body
+        uses: actions/github-script@v6
+        with:
+          script: |
+            return github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            })
+      - name: output pull request body
+        run: echo "${{steps.get-pr-body.outputs.result}}"
