@@ -5,7 +5,7 @@ on:
       - opened
       - reopened
 jobs:
-  label_pull_requests:
+  prepare_pull_requests_for_review:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
