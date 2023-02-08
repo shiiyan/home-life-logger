@@ -32,4 +32,6 @@ jobs:
               pull_number: context.issue.number
             })
       - name: output pull request body
-        run: echo "${{steps.get-pr-body.outputs.result}}"
+        uses: actions/github-scripts@v6
+        with:
+          script: console.log(steps.get-pr-body.outputs.result)
