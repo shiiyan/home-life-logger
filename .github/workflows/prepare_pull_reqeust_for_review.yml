@@ -31,7 +31,9 @@ jobs:
               repo: context.repo.repo,
               pull_number: context.issue.number
             })
-            const prBody = pr.data.body + pr.data.html_url
+            const prBody = pr.data.body + 
+            `\n - ${pr.data.html_url}` +
+            "\n"
             github.rest.pulls.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
