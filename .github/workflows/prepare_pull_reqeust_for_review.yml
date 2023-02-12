@@ -21,14 +21,20 @@ jobs:
               repo: context.repo.repo,
               labels: ["my label"]
             })
-      - name: get pull request body
-        id: get-pr-body
+      - name: update pull request body
+        id: update-pr-body
         uses: actions/github-script@v6
         with:
           script: |
-            const prBody = await github.rest.pulls.get({
+            const pr = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number
             })
-            console.log(prBody)
+            const prBody = pr.data.body + pr.data.html_url
+            github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+              body: prBody
+            })
