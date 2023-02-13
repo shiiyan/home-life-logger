@@ -28,12 +28,12 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const founds = await github.rest.pulls.list({
+            const founds = (await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: "open",
               head: context.payload.pull_request.base.label
-            })
+            })).data
             console.log("founds: ", founds);
             const exists = founds.length > 0
             if (!exists) {
@@ -51,7 +51,7 @@ jobs:
               github.rest.pulls.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                pull_number: founds[0].data.number,
+                pull_number: founds.data.number,
                 body: founds[0].data.body +
                   `\n - ${context.payload.pull_request.html_url}` +
                   "\n"
