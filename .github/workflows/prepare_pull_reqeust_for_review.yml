@@ -34,7 +34,7 @@ jobs:
               state: "open",
               head: context.payload.pull_request.base.label
             })
-            const exists = founds.length === 0
+            const exists = founds.length > 0
             if (!exists) {
               github.rest.pulls.create({
                 owner: context.repo.owner,
