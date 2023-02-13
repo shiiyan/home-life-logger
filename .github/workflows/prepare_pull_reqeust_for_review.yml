@@ -40,13 +40,13 @@ jobs:
             const exists = founds.length > 0
             const contentsToAppend = `\n - ${context.payload.pull_request.html_url}`
             if (!exists) {
-              const created = await github.rest.pulls.create({
+              const created = (await github.rest.pulls.create({
                 ...ownership,
                 head: "develop",
                 base: "master",
                 title: "develop to master",
                 body: "Pull requests" + contentsToAppend
-              })
+              })).data
               console.log(created)
               github.rest.issues.addLabels({
                 ...ownership,
