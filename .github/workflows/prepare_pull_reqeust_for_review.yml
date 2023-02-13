@@ -47,4 +47,15 @@ jobs:
           script: |
             console.log("%o", context.payload.pull_request.base)
             console.log("%o", context.payload.pull_request.head)
-            
+      - name: list pull request by source branch
+        id: list-pr-by-source
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const list = await github.rest.pulls.list({
+              owners: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              head: context.payload.pull_request.base.label
+            })
+            console.log(list)
