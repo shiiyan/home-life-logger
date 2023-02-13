@@ -45,5 +45,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            console.log(context)
+            console.log("%o", context.payload.pull_request.base)
+            console.log("%o", context.payload.pull_request.head)
             
