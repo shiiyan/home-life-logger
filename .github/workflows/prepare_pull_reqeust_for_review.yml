@@ -53,7 +53,7 @@ jobs:
         with:
           script: |
             const list = await github.rest.pulls.list({
-              owners: context.repo.owner,
+              owner: context.repo.owner,
               repo: context.repo.repo,
               state: "open",
               head: context.payload.pull_request.base.label
