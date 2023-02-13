@@ -44,8 +44,7 @@ jobs:
                 base: "master",
                 title: "develop to master",
                 body: "Pull requests" +
-                  `\n - ${context.payload.pull_request.html_url}` +
-                  "\n"
+                  `\n - ${context.payload.pull_request.html_url}`
               })
             } else {
               github.rest.pulls.update({
@@ -53,7 +52,6 @@ jobs:
                 repo: context.repo.repo,
                 pull_number: founds[0].number,
                 body: founds[0].body +
-                  `\n - ${context.payload.pull_request.html_url}` +
-                  "\n"
+                  `\n - ${context.payload.pull_request.html_url}`
               })
             }
