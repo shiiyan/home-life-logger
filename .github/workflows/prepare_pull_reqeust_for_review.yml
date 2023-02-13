@@ -47,7 +47,6 @@ jobs:
                 title: "develop to master",
                 body: "Pull requests" + contentsToAppend
               })).data
-              console.log(created)
               github.rest.issues.addLabels({
                 ...ownership,
                 issue_number: created.number,
