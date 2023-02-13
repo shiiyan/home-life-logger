@@ -21,41 +21,36 @@ jobs:
               repo: context.repo.repo,
               labels: ["my label"]
             })
-      - name: update pull request body
-        id: update-pr-body
+      - name: create or update pull request from develop
+        id: create-update-pr-from-develop
         uses: actions/github-script@v6
         with:
           script: |
-            const pr = await github.rest.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number
-            })
-            const prBody = pr.data.body + 
-            `\n - ${pr.data.html_url}` +
-            "\n"
-            github.rest.pulls.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-              body: prBody
-            })
-      - name: console log github script context
-        id: console-log-context
-        uses: actions/github-script@v6
-        with:
-          script: |
-            console.log("%o", context.payload.pull_request.base)
-            console.log("%o", context.payload.pull_request.head)
-      - name: list pull request by source branch
-        id: list-pr-by-source
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const list = await github.rest.pulls.list({
+            const founds = await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: "open",
               head: context.payload.pull_request.base.label
             })
-            console.log(list)
+            const exists = founds.length === 0
+            if (!exists) {
+              github.rest.pulls.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                head: "master",
+                base: "develop",
+                title: "develop to master",
+                body: "Pull requests" +
+                  `\n - ${context.payload.pull_request.html_url}` +
+                  "\n"
+              })
+            } else {
+              github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: founds[0].data.number,
+                body: founds[0].data.body +
+                  `\n - ${context.payload.pull_request.html_url}` +
+                  "\n"
+              })
+            }
