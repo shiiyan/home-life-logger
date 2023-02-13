@@ -51,8 +51,8 @@ jobs:
               github.rest.pulls.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                pull_number: founds.data.number,
-                body: founds[0].data.body +
+                pull_number: founds[0].number,
+                body: founds[0].body +
                   `\n - ${context.payload.pull_request.html_url}` +
                   "\n"
               })
