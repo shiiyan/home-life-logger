@@ -40,3 +40,10 @@ jobs:
               pull_number: context.issue.number,
               body: prBody
             })
+      - name: console log github script context
+        id: console-log-context
+        uses: actions/github-script@v6
+        with:
+          script: |
+            console.log(context)
+            
