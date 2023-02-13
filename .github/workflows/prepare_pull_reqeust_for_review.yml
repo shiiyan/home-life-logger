@@ -28,30 +28,29 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const founds = (await github.rest.pulls.list({
+            const ownership = {
               owner: context.repo.owner,
-              repo: context.repo.repo,
+              repo: context.repo.repo
+            }
+            const founds = (await github.rest.pulls.list({
+              ...ownership,
               state: "open",
               head: context.payload.pull_request.base.label
             })).data
-            console.log("founds: ", founds);
             const exists = founds.length > 0
+            const contentsToAppend = `\n - ${context.payload.pull_request.html_url}`
             if (!exists) {
               github.rest.pulls.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+                ...ownership,
                 head: "develop",
                 base: "master",
                 title: "develop to master",
-                body: "Pull requests" +
-                  `\n - ${context.payload.pull_request.html_url}`
+                body: "Pull requests" + contentsToAppend
               })
             } else {
               github.rest.pulls.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+                ...ownership,
                 pull_number: founds[0].number,
-                body: founds[0].body +
-                  `\n - ${context.payload.pull_request.html_url}`
+                body: founds[0].body + contentsToAppend
               })
             }
