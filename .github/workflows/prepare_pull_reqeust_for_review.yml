@@ -5,6 +5,7 @@ on:
       - opened
       - reopened
       - closed
+      - ready_for_review
 jobs:
   add_labels_to_pull_request:
     runs-on: ubuntu-latest
@@ -17,10 +18,22 @@ jobs:
         with:
           script: |
             github.rest.issues.addLabels({
-              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
+              issue_number: context.issue.number,
               labels: ["my label"]
+            })
+      - name: add assignees to pull request
+        id: assign-pr
+        uses: actions/github-script@v6
+        with:
+          script: |
+            console.log(JSON.stringify(context.payload.pull_request))
+            github.rest.issues.addAssigness({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              assigness: []
             })
   create_or_update_pull_request_from_develop:
     if: github.event.pull_request.merged == true
