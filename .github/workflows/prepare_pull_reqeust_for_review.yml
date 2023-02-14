@@ -6,6 +6,8 @@ on:
       - reopened
       - closed
       - ready_for_review
+    branches:
+      - 'epic/**'
 jobs:
   add_labels_assignees_to_pull_request:
     if: endsWith(github.event.action, 'opened')
