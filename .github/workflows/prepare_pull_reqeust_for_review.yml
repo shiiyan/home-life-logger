@@ -45,7 +45,7 @@ jobs:
               assignees: [author]
             })
   request_review_when_ready:
-    if: github.event_name == "ready_for_review"
+    if: github.event.action == 'ready_for_review'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
