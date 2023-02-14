@@ -1,0 +1,108 @@
+name: Prepare pull requests for review
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - closed
+      - ready_for_review
+    branches:
+      - 'epic/**'
+jobs:
+  add_labels_assignees_to_pull_request:
+    if: endsWith(github.event.action, 'opened')
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: add labels to pull request
+        id: label-pr
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { labels } = context.payload.pull_request
+            if (labels.length > 0) {
+              console.info("PR already has labels")
+              return
+            }
+            github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ["my label"]
+            })
+      - name: add assignees to pull request
+        id: assign-pr
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { assignees, number, user: { login: author }} = context.payload.pull_request
+            if (assignees.length > 0) {
+              console.info("PR has been assigned")
+              return
+            }
+            github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: number,
+              assignees: [author]
+            })
+  request_review_when_ready:
+    if: github.event.action == 'ready_for_review'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: request review when pull request is ready
+        id: request-review-pr
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              team_reviewers: []
+            })
+  create_or_update_pull_request_from_develop:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: create or update pull request from develop
+        id: create-update-pr-from-develop
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const ownership = {
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            }
+            const founds = (await github.rest.pulls.list({
+              ...ownership,
+              state: "open",
+              head: context.payload.pull_request.base.label
+            })).data
+            const exists = founds.length > 0
+            const contentsToAppend = `\n - ${context.payload.pull_request.html_url}`
+            if (!exists) {
+              const created = (await github.rest.pulls.create({
+                ...ownership,
+                head: "develop",
+                base: "master",
+                title: "develop to master",
+                body: "Pull requests" + contentsToAppend
+              })).data
+              github.rest.issues.addLabels({
+                ...ownership,
+                issue_number: created.number,
+                labels: ["my label"]
+              })
+            } else {
+              github.rest.pulls.update({
+                ...ownership,
+                pull_number: founds[0].number,
+                body: founds[0].body + contentsToAppend
+              })
+            }
