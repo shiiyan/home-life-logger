@@ -17,7 +17,11 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            console.log(context.payload.pull_request)
+            const { labels } = context.payload.pull_request
+            if (labels.length > 0) {
+              console.info("PR already has labels")
+              return
+            }
             github.rest.issues.addLabels({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -34,6 +38,7 @@ jobs:
               console.info("PR has been assigned")
               return
             }
+            console.log(author)
             github.rest.issues.addAssignees({
               owner: context.repo.owner,
               repo: context.repo.repo,
