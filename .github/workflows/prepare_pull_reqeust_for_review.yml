@@ -38,7 +38,6 @@ jobs:
               console.info("PR has been assigned")
               return
             }
-            console.log(author)
             github.rest.issues.addAssignees({
               owner: context.repo.owner,
               repo: context.repo.repo,
