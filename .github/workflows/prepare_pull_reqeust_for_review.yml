@@ -6,7 +6,7 @@ on:
       - reopened
       - closed
 jobs:
-  prepare_pull_requests_for_review:
+  add_labels_to_pull_request:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -22,8 +22,13 @@ jobs:
               repo: context.repo.repo,
               labels: ["my label"]
             })
+  create_or_update_pull_request_from_develop:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      pull-request: write
+    steps:
       - name: create or update pull request from develop
-        if: github.event.pull_request.merged == true
         id: create-update-pr-from-develop
         uses: actions/github-script@v6
         with:
