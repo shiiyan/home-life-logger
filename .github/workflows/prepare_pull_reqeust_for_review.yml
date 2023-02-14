@@ -17,6 +17,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            console.log(context.payload.pull_request)
             github.rest.issues.addLabels({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -28,12 +29,16 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            console.log("%o", context.payload.pull_request.user)
+            const { assignees, number, user: { login: author }} = context.payload.pull_request
+            if (assignees.length > 0) {
+              console.info("PR has been assigned")
+              return
+            }
             github.rest.issues.addAssignees({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
-              assigness: []
+              issue_number: number,
+              assigness: [author]
             })
   create_or_update_pull_request_from_develop:
     if: github.event.pull_request.merged == true
