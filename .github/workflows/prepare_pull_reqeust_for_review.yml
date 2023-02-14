@@ -28,8 +28,8 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            console.log(JSON.stringify(context.payload.pull_request))
-            github.rest.issues.addAssigness({
+            console.log("%o", context.payload.pull_request.user)
+            github.rest.issues.addAssignees({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
