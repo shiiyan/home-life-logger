@@ -43,7 +43,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: number,
-              assigness: [author]
+              assignees: [author]
             })
   create_or_update_pull_request_from_develop:
     if: github.event.pull_request.merged == true
